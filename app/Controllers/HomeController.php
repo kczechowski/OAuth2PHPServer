@@ -9,6 +9,6 @@ class HomeController extends Controller
 {
     public function index(Request $request, Response $response)
     {
-        return 'Hello world';
+        return $response->write("Hello world");
     }
 }

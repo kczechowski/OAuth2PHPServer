@@ -32,8 +32,8 @@ $app = new \Slim\App([
 
 $app->add(new Tuupola\Middleware\CorsMiddleware([
     "origin" => ["*"],
-    "methods" => ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    "headers.allow" => ["Content-Type"],
+    "methods" => ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    "headers.allow" => ["Accept", "Content-Type", "Authorization", "Origin", "X-Requested-With"],
     "headers.expose" => [],
     "credentials" => false,
     "cache" => 0,
@@ -44,7 +44,7 @@ $scopeRepository = new ScopeRepository();
 $accessTokenRepository = new AccessTokenRepository();
 $privateKey = 'file://' . ROOT_PATH . 'private.key';
 $publicKey = 'file://' . ROOT_PATH . 'public.key';
-
+$redirectResponse = new \League\OAuth2\Server\ResponseTypes\RedirectResponse();
 $authServer = new AuthorizationServer(
     $clientRepository,
     $accessTokenRepository,

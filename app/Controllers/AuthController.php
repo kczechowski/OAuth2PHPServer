@@ -54,13 +54,16 @@ class AuthController extends Controller
         $params = $request->getParams();
         //validate
 
-        Capsule::table('oauth_clients')
-            ->insert([
-                'client_id' => $params['username'],
-                'client_secret' => $params['password'],
-                'email' => $params['email']
-            ]);
-
+        try {
+            Capsule::table('oauth_clients')
+                ->insert([
+                    'client_id' => $params['username'],
+                    'client_secret' => password_hash($params['password'], PASSWORD_BCRYPT),
+                    'email' => $params['email']
+                ]);
+        }catch (\Exception $exception){
+            return $response->withStatus(400);
+        }
         return $response->withStatus(201, 'user created');
     }
 
