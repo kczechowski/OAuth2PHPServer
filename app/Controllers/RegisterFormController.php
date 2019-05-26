@@ -26,8 +26,11 @@ class RegisterFormController extends Controller
 <body>
     <h1>OAuth register</h1>
     <form method="POST" action="" id="form" onsubmit="submitForm(event,this)">
+        <label>Username</label>
         <input type="text" name="user" >
+        <label>Password</label>
         <input type="password" name="password">
+        <label>email</label>
         <input type="email" name="email">
         <input type="submit">
     </form>
